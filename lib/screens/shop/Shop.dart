@@ -53,10 +53,7 @@ class _ShopState extends State<Shop> {
             icon: Icon(Icons.person),
             label: Text("Log out"),
           ),
-          FlatButton.icon(onPressed: (){
-            SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');
-          }, icon: Icon(Icons.exit_to_app), label: Text("Exit"),),
-        ],
+                  ],
         leading: IconButton(
           onPressed: () {
             Navigator.push(
