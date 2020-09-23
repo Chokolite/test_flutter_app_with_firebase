@@ -5,6 +5,7 @@ import 'package:my_flutter_app_with_firebase/shared/Constants.dart';
 
 class SignIn extends StatefulWidget {
   final Function switchView;
+
   SignIn({this.switchView});
 
   @override
@@ -12,8 +13,8 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
- final AuthService _auth = AuthService();
- final GlobalKey _formKey = GlobalKey<FormState>();
+  final AuthService _auth = AuthService();
+  final GlobalKey _formKey = GlobalKey<FormState>();
 
   String email = " ";
   String password = " ";
@@ -27,13 +28,12 @@ class _SignInState extends State<SignIn> {
         elevation: 0.0,
         actions: [
           FlatButton.icon(
-              onPressed: () {widget.switchView();},
-              icon: Icon(Icons.person),
-              label: Text("Register"),
+            onPressed: () {
+              widget.switchView();
+            },
+            icon: Icon(Icons.person),
+            label: Text("Register"),
           ),
-          FlatButton.icon(onPressed: (){
-            SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');
-          }, icon: Icon(Icons.exit_to_app), label: Text("Exit"),),
         ],
       ),
       body: Container(
@@ -43,10 +43,10 @@ class _SignInState extends State<SignIn> {
           child: Column(
             children: [
               TextFormField(
-                  decoration: textInputDecoration.copyWith(hintText: "Email"),
+                decoration: textInputDecoration.copyWith(hintText: "Email"),
                 onChanged: (val) => email = val,
               ),
-            SizedBox(height: 20.0),
+              SizedBox(height: 20.0),
               TextFormField(
                 obscureText: true,
                 decoration: textInputDecoration.copyWith(hintText: "Password"),
@@ -56,12 +56,13 @@ class _SignInState extends State<SignIn> {
               RaisedButton(
                 child: Text("Sign in"),
                 onPressed: () async {
-                dynamic result = await _auth.signInWithEmailAndPassword(email, password);
-                if(result == null){
-                  setState(() {
-                        _error = "Wrong password or email";
-                  });
-                }
+                  dynamic result =
+                      await _auth.signInWithEmailAndPassword(email, password);
+                  if (result == null) {
+                    setState(() {
+                      _error = "Wrong password or email";
+                    });
+                  }
                 },
               ),
               SizedBox(height: 20.0),

@@ -112,7 +112,7 @@ class AuthService extends ChangeNotifier {
 
    signOut() async {
     try {
-       await _googleSignIn.disconnect();
+       _googleSignIn.disconnect();
       return _auth.signOut();
     } catch (e) {
       print(e.toString());
