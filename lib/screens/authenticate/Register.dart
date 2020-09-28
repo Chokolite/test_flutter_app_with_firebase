@@ -50,12 +50,14 @@ class _RegisterState extends State<Register> {
           child: ListView(
             children: [
               TextFormField(
+                style: TextStyle(fontWeight: FontWeight.w300),
                 validator: (val) => val.isEmpty ? "Enter the email" : null,
                 decoration: textInputDecoration.copyWith(hintText: "Email"),
                 onChanged: (val) => email = val,
               ),
               SizedBox(height: 20.0),
               TextFormField(
+                style: TextStyle(fontWeight: FontWeight.w300),
                 validator: (val) =>
                 val.length < 6 ? "Password less than 6 chars" : null,
                 obscureText: true,
@@ -66,13 +68,15 @@ class _RegisterState extends State<Register> {
               ),
               SizedBox(height: 20.0),
               TextFormField(
-                  validator: (val) => val.isEmpty ? "Enter the name" : null,
+                style: TextStyle(fontWeight: FontWeight.w300),
+                validator: (val) => val.isEmpty ? "Enter the name" : null,
                   decoration: textInputDecoration.copyWith(hintText: "Name"),
                   onChanged: (val) =>
                   name = val,
               ),
               SizedBox(height: 20.0),
               FloatingActionButton(
+                elevation: 0,
                 backgroundColor: _picked ? buttonColor : Colors.grey,
                 child: Icon(
                   Icons.image,
@@ -94,7 +98,7 @@ class _RegisterState extends State<Register> {
                   image == null ? Text("") : Image.file(image)),
               RaisedButton(
                 color: buttonColor,
-                child: Text("Register"),
+                child: Text("Register", style: textColor,),
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {
                     dynamic result = await _auth.registerWithEmailAndPassword(

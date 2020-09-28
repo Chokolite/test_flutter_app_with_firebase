@@ -43,11 +43,13 @@ class _SignInState extends State<SignIn> {
           child: Column(
             children: [
               TextFormField(
-                decoration: textInputDecoration.copyWith(hintText: "Email"),
+                style: TextStyle(fontWeight: FontWeight.w300),
+                decoration: textInputDecoration.copyWith(hintText: "Email",),
                 onChanged: (val) => email = val,
               ),
               SizedBox(height: 20.0),
               TextFormField(
+                style: TextStyle(fontWeight: FontWeight.w300),
                 obscureText: true,
                 decoration: textInputDecoration.copyWith(hintText: "Password"),
                 onChanged: (val) => password = val,
@@ -68,7 +70,7 @@ class _SignInState extends State<SignIn> {
               ),
               SizedBox(height: 20.0),
               RaisedButton(
-                child: Text("Sign in with Google", style: textColor),
+                child: Text("Sign in with Google", style: textColor,),
                 onPressed: () {
                   _auth.signInWithGoogle();
                 },
