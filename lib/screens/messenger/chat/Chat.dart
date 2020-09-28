@@ -55,45 +55,50 @@ class _ChatState extends State<Chat> {
                             })
                         : Loading(); //Text("stream is null");
                   })),
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          context
-                              .read<ChatProvider>()
-                              .fromGallery(_chatId, widget.myId);
-                        },
-                        icon: Icon(Icons.image),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          context
-                              .read<ChatProvider>()
-                              .fromCamera(_chatId, widget.myId);
-                        },
-                        icon: Icon(Icons.camera_alt),
-                      ),
-                      Flexible(
-                        child: TextFormField(
-                          decoration: textInputDecoration,
-                          controller:
-                              context.watch<ChatProvider>().getController,
-                          onChanged: (val) =>
-                              context.read<ChatProvider>().changeText(val),
-                          // cp.changeText(val);
+                  Container(
+                    color: Colors.grey[200],
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            context
+                                .read<ChatProvider>()
+                                .fromGallery(_chatId, widget.myId);
+                          },
+                          icon: Icon(Icons.image),
                         ),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          context
-                              .read<ChatProvider>()
-                              .send(_chatId, widget.myId);
-                        },
-                        icon: Icon(
-                          Icons.send,
+                        IconButton(
+                          onPressed: () {
+                            context
+                                .read<ChatProvider>()
+                                .fromCamera(_chatId, widget.myId);
+                          },
+                          icon: Icon(Icons.camera_alt),
                         ),
-                      ),
-                    ],
+                        Flexible(
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                                hintText: "Message"
+                            ),
+                            controller:
+                                context.watch<ChatProvider>().getController,
+                            onChanged: (val) =>
+                                context.read<ChatProvider>().changeText(val),
+                            // cp.changeText(val);
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            context
+                                .read<ChatProvider>()
+                                .send(_chatId, widget.myId);
+                          },
+                          icon: Icon(
+                            Icons.send,
+                          ),
+                        ),
+                      ],
+                    ),
                   )
                 ],
               )),

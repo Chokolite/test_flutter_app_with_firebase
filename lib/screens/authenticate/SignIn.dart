@@ -24,15 +24,15 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sign In"),
+        title: Text("Sign In", style: textColor,),
         elevation: 0.0,
         actions: [
           FlatButton.icon(
             onPressed: () {
               widget.switchView();
             },
-            icon: Icon(Icons.person),
-            label: Text("Register"),
+            icon: Icon(Icons.person, color: iconColor,),
+            label: Text("Register", style: textColor,),
           ),
         ],
       ),
@@ -54,7 +54,7 @@ class _SignInState extends State<SignIn> {
               ),
               SizedBox(height: 20.0),
               RaisedButton(
-                child: Text("Sign in"),
+                child: Text("Sign in", style: textColor,),
                 onPressed: () async {
                   dynamic result =
                       await _auth.signInWithEmailAndPassword(email, password);
@@ -64,13 +64,15 @@ class _SignInState extends State<SignIn> {
                     });
                   }
                 },
+                color: buttonColor,
               ),
               SizedBox(height: 20.0),
               RaisedButton(
-                child: Text("Sign in with Google"),
+                child: Text("Sign in with Google", style: textColor),
                 onPressed: () {
                   _auth.signInWithGoogle();
                 },
+                color: buttonColor,
               ),
               Text(
                 _error,

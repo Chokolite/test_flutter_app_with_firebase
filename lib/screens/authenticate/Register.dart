@@ -31,15 +31,15 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Register"),
+        title: Text("Register", style: textColor,),
         elevation: 0.0,
         actions: [
           FlatButton.icon(
             onPressed: () {
               widget.switchView();
             },
-            icon: Icon(Icons.person),
-            label: Text("Sign in"),
+            icon: Icon(Icons.person, color: iconColor,),
+            label: Text("Sign in", style: textColor,),
           ),
         ],
       ),
@@ -73,9 +73,10 @@ class _RegisterState extends State<Register> {
               ),
               SizedBox(height: 20.0),
               FloatingActionButton(
+                backgroundColor: _picked ? buttonColor : Colors.grey,
                 child: Icon(
                   Icons.image,
-                  color: _picked ? Colors.green : Colors.grey,
+                  color: _picked ? Colors.green : Colors.blueGrey,
                 ),
                 onPressed: () async {
                   image = File((await ImagePicker()
@@ -92,6 +93,7 @@ class _RegisterState extends State<Register> {
                   child:
                   image == null ? Text("") : Image.file(image)),
               RaisedButton(
+                color: buttonColor,
                 child: Text("Register"),
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {

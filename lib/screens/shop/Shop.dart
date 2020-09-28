@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_flutter_app_with_firebase/shared/Constants.dart';
 import 'package:provider/provider.dart';
 import 'package:my_flutter_app_with_firebase/screens/shop/AddForm.dart';
 import 'package:my_flutter_app_with_firebase/screens/shop/MyList.dart';
@@ -40,21 +41,22 @@ class _ShopState extends State<Shop> {
         actions: [
           IconButton(
             onPressed: () => _showAddPanel(),
-            icon: Icon(Icons.add),
+            icon: Icon(Icons.add, color: iconColor,),
           ),
           IconButton(
             onPressed: () => toggleState(),
-            icon: isGridMode ? Icon(Icons.grid_on) : Icon(Icons.list),
+            icon: isGridMode ? Icon(Icons.grid_on, color: iconColor,) : Icon(Icons.list, color: iconColor,),
           ),
           FlatButton.icon(
             onPressed: () {
              _auth.signOut();
             },
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.person, color: iconColor,),
             label: Text("Log out"),
           ),
                   ],
         leading: IconButton(
+          color: buttonColor,
           onPressed: () {
             Navigator.push(
                 context,
@@ -66,10 +68,11 @@ class _ShopState extends State<Shop> {
                 )
             );
           },
-          icon: Icon(Icons.chat),
+          icon: Icon(Icons.chat, color: iconColor,),
         ),
+        backgroundColor: appBarColor,
       ),
-      body: Container(
+      body:Container(
         child: MyList(
           isGridMode: isGridMode,
         ),

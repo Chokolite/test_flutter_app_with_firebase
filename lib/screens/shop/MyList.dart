@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_app_with_firebase/model/Item.dart';
 import 'package:my_flutter_app_with_firebase/screens/shop/ProductDetails.dart';
+import 'package:my_flutter_app_with_firebase/shared/Constants.dart';
 import 'package:my_flutter_app_with_firebase/shared/Loading.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +26,7 @@ class _MyListState extends State<MyList> {
                 return Padding(
                   padding: EdgeInsets.only(top: 8.0),
                   child: Card(
+                    color: buttonColor,
                     margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
                     child: ListTile(
                       onTap: () {
@@ -56,6 +58,7 @@ class _MyListState extends State<MyList> {
                   },
                   child: Container(
                     child: Card(
+                      elevation: 0,
                       child: Image.network(_items[index].imageLink),
                     ),
                   ),

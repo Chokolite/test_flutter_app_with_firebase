@@ -20,7 +20,8 @@ class ChatTile extends StatelessWidget {
             : EdgeInsets.only(right: 30),
         padding: EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
         decoration: BoxDecoration(
-          color: message.sendBy == sendByMe ? Colors.blue : Colors.grey,
+          color: message.sendBy == sendByMe ? Color.fromRGBO(144, 233, 150, 0.6)
+            :  Color.fromRGBO(100, 150, 100, 0.6),
           borderRadius: message.sendBy == sendByMe
               ? BorderRadius.only(
                   topLeft: Radius.circular(23),
