@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_app_with_firebase/screens/authenticate/Register.dart';
-import 'package:my_flutter_app_with_firebase/screens/authenticate/Email.dart';
 import 'package:my_flutter_app_with_firebase/screens/authenticate/SignIn.dart';
 
 class Authenticate extends StatefulWidget {

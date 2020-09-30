@@ -10,7 +10,6 @@ class DatabaseShopService {
 
   final CollectionReference _shop =
       FirebaseFirestore.instance.collection("shop");
-  final FirebaseStorage _fs = FirebaseStorage.instance;
 
   Future<List<Item>>get items async {
     return await _shop.get().then((snapshot) => snapshot.docs.map((e) => Item.fromFirebase(e)).toList());
