@@ -57,10 +57,7 @@ class _MyListState extends State<MyList> {
                             ProductDetails(item: _items[index],)));
                   },
                   child: Container(
-                    child: Card(
-                      elevation: 0,
-                      child: Image.network(_items[index].imageLink),
-                    ),
+                    child: Image.network(_items[index].imageLink),
                   ),
                 );
               }),

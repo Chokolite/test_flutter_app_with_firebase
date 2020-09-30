@@ -1,88 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:my_flutter_app_with_firebase/services/AuthService.dart';
+import 'package:my_flutter_app_with_firebase/screens/authenticate/Register.dart';
 import 'package:my_flutter_app_with_firebase/shared/Constants.dart';
+import 'package:my_flutter_app_with_firebase/screens/authenticate/SignIn_Provider.dart';
+import 'package:my_flutter_app_with_firebase/screens/authenticate/Email.dart';
 
-class SignIn extends StatefulWidget {
-  final Function switchView;
-
-  SignIn({this.switchView});
-
-  @override
-  _SignInState createState() => _SignInState();
-}
-
-class _SignInState extends State<SignIn> {
-  final AuthService _auth = AuthService();
-  final GlobalKey _formKey = GlobalKey<FormState>();
-
-  String email = " ";
-  String password = " ";
-  String _error = " ";
-
+class SignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SignInProvider _auth = SignInProvider();
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Sign In", style: textColor,),
-        elevation: 0.0,
-        actions: [
-          FlatButton.icon(
-            onPressed: () {
-              widget.switchView();
-            },
-            icon: Icon(Icons.person, color: iconColor,),
-            label: Text("Register", style: textColor,),
-          ),
-        ],
-      ),
       body: Container(
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 8.0),
-        child: Form(
-          key: _formKey,
+        color: bodyBackgroundColor,
+        child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextFormField(
-                style: TextStyle(fontWeight: FontWeight.w300),
-                decoration: textInputDecoration.copyWith(hintText: "Email",),
-                onChanged: (val) => email = val,
+              Text("Please Sign In or Register", style: textColor.copyWith(fontWeight: FontWeight.w500),),
+              SizedBox(height: 30,),
+              Container(
+                  color: buttonColor,
+                  child:
+                  FlatButton.icon(
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Email()));},
+                      icon: Icon(Icons.email),
+                      label: Text("Email and password", style: textColor,))),
+              SizedBox(
+                height: 20,
               ),
-              SizedBox(height: 20.0),
-              TextFormField(
-                style: TextStyle(fontWeight: FontWeight.w300),
-                obscureText: true,
-                decoration: textInputDecoration.copyWith(hintText: "Password"),
-                onChanged: (val) => password = val,
+              Container(
+                  color: buttonColor,
+                  child: FlatButton.icon(
+                      onPressed: (){_auth.authWithGoogle();},
+                      icon: Icon(Icons.search),
+                      label: Text("Google", style: textColor,))),
+              SizedBox(
+                height: 20,
               ),
-              SizedBox(height: 20.0),
-              RaisedButton(
-                child: Text("Sign in", style: textColor,),
-                onPressed: () async {
-                  dynamic result =
-                      await _auth.signInWithEmailAndPassword(email, password);
-                  if (result == null) {
-                    setState(() {
-                      _error = "Wrong password or email";
-                    });
-                  }
-                },
+              Container(
                 color: buttonColor,
-              ),
-              SizedBox(height: 20.0),
-              RaisedButton(
-                child: Text("Sign in with Google", style: textColor,),
-                onPressed: () {
-                  _auth.signInWithGoogle();
-                },
-                color: buttonColor,
-              ),
-              Text(
-                _error,
-                style: TextStyle(
-                  color: Colors.red,
-                  fontSize: 14.0,
-                ),
-              ),
+                  child: FlatButton.icon(
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Register()));
+                      },
+                      icon: Icon(Icons.create),
+                      label: Text("Register", style: textColor,))),
             ],
           ),
         ),

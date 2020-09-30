@@ -10,7 +10,7 @@ class DatabaseShopService {
 
   final CollectionReference _shop =
       FirebaseFirestore.instance.collection("shop");
-  final FirebaseStorage fs = FirebaseStorage.instance;
+  final FirebaseStorage _fs = FirebaseStorage.instance;
 
   Future<List<Item>>get items async {
     return await _shop.get().then((snapshot) => snapshot.docs.map((e) => Item.fromFirebase(e)).toList());
@@ -18,8 +18,8 @@ class DatabaseShopService {
 
   _uploadImage(File image, String name) async{
     String imageLink;
-    FirebaseStorage fs = FirebaseStorage.instance;
-    StorageReference sr = fs.ref();
+    FirebaseStorage _fs = FirebaseStorage.instance;
+    StorageReference sr = _fs.ref();
     StorageReference itemImage = sr.child("itemImage").child(name);
 
     await itemImage.putFile(image).onComplete.then((storageTask) async{

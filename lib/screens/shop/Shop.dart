@@ -73,6 +73,7 @@ class _ShopState extends State<Shop> {
         backgroundColor: appBarColor,
       ),
       body:Container(
+        color: bodyBackgroundColor,
         child: MyList(
           isGridMode: isGridMode,
         ),

@@ -32,7 +32,7 @@ class _ChatState extends State<Chat> {
         value: DatabaseMessengerService(chatId: _chatId).messages,
         child: Scaffold(
           appBar: AppBar(
-            title: Text("${widget.user.name}"),
+            title: Text("${widget.user.name}", style: textColor,),
             centerTitle: true,
           ),
           body: Container(
