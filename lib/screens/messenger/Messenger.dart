@@ -4,6 +4,7 @@ import 'package:my_flutter_app_with_firebase/screens/messenger/chat/Chat.dart';
 import 'package:my_flutter_app_with_firebase/screens/messenger/chat/Chat_Provider.dart';
 import 'package:my_flutter_app_with_firebase/services/DatabaseMessengerService.dart';
 import 'package:my_flutter_app_with_firebase/shared/Constants.dart';
+import 'package:my_flutter_app_with_firebase/shared/Loading.dart';
 import 'package:provider/provider.dart';
 
 class Messenger extends StatefulWidget {
@@ -24,7 +25,7 @@ class _MessengerState extends State<Messenger> {
         color: bodyBackgroundColor,
         child: Consumer<List<UserData>>(
             builder: (context, List<UserData> users, _) {
-          return ListView.builder(
+          return users != null? ListView.builder(
               itemCount: users.length,
               itemBuilder: (context, index) {
                 return Padding(
@@ -58,7 +59,7 @@ class _MessengerState extends State<Messenger> {
                     }),
                   ),
                 );
-              });
+              }) : Loading();
         }),
       ),
     );
