@@ -39,8 +39,8 @@ class _MyListState extends State<MyList> {
                                     )));
                       },
                       leading: Image.network(_items[index].imageLink),
-                      title: Text(_items[index].name),
-                      subtitle: Text(_items[index].model),
+                      title: Text(_items[index].name, style: textColor,),
+                      subtitle: Text(_items[index].model, style: textColor,),
                     ),
                   ),
                 );

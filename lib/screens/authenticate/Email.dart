@@ -61,13 +61,6 @@ class _EmailState extends State<Email> {
                 color: buttonColor,
               ),
               SizedBox(height: 20.0),
-              RaisedButton(
-                child: Text("Sign in with Google", style: textColor,),
-                onPressed: () {
-                  _auth.signInWithGoogle();
-                },
-                color: buttonColor,
-              ),
               Text(
                 _error,
                 style: TextStyle(

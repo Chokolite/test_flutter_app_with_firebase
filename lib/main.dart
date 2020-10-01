@@ -4,8 +4,7 @@ import 'package:my_flutter_app_with_firebase/screens/Wrapper.dart';
 import 'package:my_flutter_app_with_firebase/services/AuthService.dart';
 import 'package:my_flutter_app_with_firebase/shared/Constants.dart';
 import 'package:provider/provider.dart';
-
-import 'model/UserData.dart';
+import 'package:my_flutter_app_with_firebase/model/UserData.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

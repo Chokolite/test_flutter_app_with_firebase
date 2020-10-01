@@ -30,12 +30,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                 Text(
                   "model: ${widget.item.model}",
                   style: textColor.copyWith(
-                      fontWeight: FontWeight.w400, fontSize: 50),
+                      fontWeight: FontWeight.w300, fontSize: 35),
                 ),
                 Text(
                   "color: ${widget.item.color}",
                   style: textColor.copyWith(
-                      fontWeight: FontWeight.w400, fontSize: 50),
+                      fontWeight: FontWeight.w300, fontSize: 35),
                 ),
               ]),
         ));

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_app_with_firebase/screens/authenticate/Register.dart';
+import 'package:my_flutter_app_with_firebase/screens/authenticate/signIn/SignIn_Provider.dart';
 import 'package:my_flutter_app_with_firebase/shared/Constants.dart';
-import 'package:my_flutter_app_with_firebase/screens/authenticate/SignIn_Provider.dart';
 import 'package:my_flutter_app_with_firebase/screens/authenticate/Email.dart';
 
 class SignIn extends StatelessWidget {
