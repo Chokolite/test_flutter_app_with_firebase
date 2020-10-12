@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:my_flutter_app_with_firebase/screens/Wrapper.dart';
 import 'package:my_flutter_app_with_firebase/services/DatabaseShopService.dart';
 import 'package:my_flutter_app_with_firebase/shared/Constants.dart';
 
@@ -60,6 +61,8 @@ class _AddFormState extends State<AddForm> {
               if(uploadResult !=null){
                setState((){
                  _result = "success";
+                 Navigator.pushReplacement(context,
+                     MaterialPageRoute(builder: (context) => Wrapper()));
                });
               }else{
                 setState((){
@@ -68,7 +71,7 @@ class _AddFormState extends State<AddForm> {
               }
               },
           ),
-          _result == null? Text("wait for sending") : Text("$_result", style: TextStyle(color: Colors.green),),
+          _result == null? Text("") : Text("$_result", style: TextStyle(color: Colors.green),),
         ],
       );
   }

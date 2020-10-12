@@ -107,6 +107,8 @@ class _RegisterState extends State<Register> {
                         image: image);
                     if (result == null) {
                       _error = "please supply a valid data";
+                    } else{
+                      Navigator.pop(context);
                     }
                   }
                 },

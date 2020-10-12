@@ -13,16 +13,17 @@ class DatabaseMessengerService {
   DatabaseMessengerService({this.chatId, this.uid});
 
   final CollectionReference _chat =
-  FirebaseFirestore.instance.collection("chat");
+      FirebaseFirestore.instance.collection("chat");
 
   final CollectionReference _users =
-  FirebaseFirestore.instance.collection("users");
+      FirebaseFirestore.instance.collection("users");
 
   downloadAvatar(String uid) async {
-    StorageReference avatarsFolder = FirebaseStorage.instance.ref().child("avatars");
+    StorageReference avatarsFolder =
+        FirebaseStorage.instance.ref().child("avatars");
 
     File avatar =
-    File.fromRawPath(await avatarsFolder.child(uid).getDownloadURL());
+        File.fromRawPath(await avatarsFolder.child(uid).getDownloadURL());
 
     return avatar;
   }
@@ -32,12 +33,9 @@ class DatabaseMessengerService {
     FirebaseStorage fs = FirebaseStorage.instance;
     StorageReference sr = fs.ref();
     StorageReference itemImage =
-    sr.child("images").child(Random().hashCode.toString());
+        sr.child("images").child(Random().hashCode.toString());
 
-    await itemImage
-        .putFile(image)
-        .onComplete
-        .then((storageTask) async {
+    await itemImage.putFile(image).onComplete.then((storageTask) async {
       String image = await storageTask.ref.getDownloadURL();
       imageLink = image;
     });
@@ -65,8 +63,7 @@ class DatabaseMessengerService {
     return _chat.doc(chatId).collection("messages");
   }
 
-  Future<void> sendMessage(
-      {String chatId, String text, String sendBy}) async {
+  Future<void> sendMessage({String chatId, String text, String sendBy}) async {
     return await _chat.doc(chatId).collection("messages").add({
       "text": text,
       "sendBy": sendBy,
@@ -83,18 +80,33 @@ class DatabaseMessengerService {
     });
   }
 
-  Future<List<Message>> get messages async {
-     return await _chat
+  List<Message> _messagesListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map((doc) {
+      return Message(
+        text: doc.data()["text"] as String ?? "",
+        sendBy: doc.data()["sendBy"].toString()?? "",
+        time: doc.data()["time"].toString() ?? "",
+        imageLink: doc.data()["imageLink"].toString() ?? "",
+      );
+    }).toList();
+  }
+
+  Stream<List<Message>> get messages {
+    return _chat
+        // .doc(chatId)
+        //         // .collection("messages")
+        //         // .orderBy("time")
+        //         // .get()
+        //         //  .then((snapshot) =>
+        //         //  snapshot.docs.map((e) => Message.fromFirebase(e)).toList());
         .doc(chatId)
         .collection("messages")
         .orderBy("time")
-        .get()
-         .then((snapshot) =>
-         snapshot.docs.map((e) => Message.fromFirebase(e)).toList());
-
+        .snapshots()
+        .map(_messagesListFromSnapshot);
   }
 
-  Future<List<UserData>> get userData async{
+  Future<List<UserData>> get userData async {
     return await _users.get().then((snapshot) =>
         snapshot.docs.map((e) => UserData.fromFirebase(e)).toList());
   }

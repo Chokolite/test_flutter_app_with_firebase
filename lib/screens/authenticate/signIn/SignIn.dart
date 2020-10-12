@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_flutter_app_with_firebase/screens/authenticate/Register.dart';
-import 'package:my_flutter_app_with_firebase/screens/authenticate/signIn/SignIn_Provider.dart';
+import 'package:my_flutter_app_with_firebase/services/AuthService.dart';
 import 'package:my_flutter_app_with_firebase/shared/Constants.dart';
 import 'package:my_flutter_app_with_firebase/screens/authenticate/Email.dart';
+import 'package:provider/provider.dart';
 
-class SignIn extends StatelessWidget {
+class SignIn extends StatefulWidget {
+
+  @override
+  _SignInState createState() => _SignInState();
+}
+
+class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     final String googleLogo = "assets/svg/Google_Logo.svg";
@@ -13,7 +20,7 @@ class SignIn extends StatelessWidget {
       googleLogo,
       semanticsLabel: "Google G Logo",
     );
-    SignInProvider _auth = SignInProvider();
+    AuthService _auth = AuthService();
     return Scaffold(
       body: Container(
         color: bodyBackgroundColor,
@@ -33,7 +40,9 @@ class SignIn extends StatelessWidget {
                   child: FlatButton.icon(
                       onPressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Email()));
+                            MaterialPageRoute(builder: (context) => ChangeNotifierProvider(
+                              create: (_) => AuthService(),
+                            child: Email())));
                       },
                       icon: Icon(Icons.email),
                       label: Text(
@@ -47,7 +56,7 @@ class SignIn extends StatelessWidget {
                   color: buttonColor,
                   child: FlatButton.icon(
                       onPressed: () {
-                        _auth.authWithGoogle();
+                        _auth.signInWithGoogle();
                       },
                       icon: SizedBox(
                         height: 20,

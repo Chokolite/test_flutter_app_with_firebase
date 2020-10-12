@@ -17,7 +17,6 @@ class _ShopState extends State<Shop> {
   AuthService _auth = AuthService();
   bool isGridMode = false;
 
-
   void toggleState() {
     setState(() => isGridMode = !isGridMode);
   }
@@ -39,39 +38,56 @@ class _ShopState extends State<Shop> {
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () => _showAddPanel(),
-            icon: Icon(Icons.add, color: iconColor,),
+            onPressed: () {
+              _showAddPanel();
+            },
+            icon: Icon(
+              Icons.add,
+              color: iconColor,
+            ),
           ),
           IconButton(
             onPressed: () => toggleState(),
-            icon: isGridMode ? Icon(Icons.grid_on, color: iconColor,) : Icon(Icons.list, color: iconColor,),
+            icon: isGridMode
+                ? Icon(
+                    Icons.grid_on,
+                    color: iconColor,
+                  )
+                : Icon(
+                    Icons.list,
+                    color: iconColor,
+                  ),
           ),
           FlatButton.icon(
             onPressed: () {
-             _auth.signOut();
+              _auth.signOut();
             },
-            icon: Icon(Icons.person, color: iconColor,),
+            icon: Icon(
+              Icons.person,
+              color: iconColor,
+            ),
             label: Text("Log out"),
           ),
-                  ],
+        ],
         leading: IconButton(
           color: buttonColor,
           onPressed: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                  FutureProvider<List<UserData>>.value
-                    (value: DatabaseMessengerService().userData,
+                  builder: (context) => FutureProvider<List<UserData>>.value(
+                      value: DatabaseMessengerService().userData,
                       child: Messenger()),
-                )
-            );
+                ));
           },
-          icon: Icon(Icons.chat, color: iconColor,),
+          icon: Icon(
+            Icons.chat,
+            color: iconColor,
+          ),
         ),
         backgroundColor: appBarColor,
       ),
-      body:Container(
+      body: Container(
         color: bodyBackgroundColor,
         child: MyList(
           isGridMode: isGridMode,

@@ -28,7 +28,7 @@ class _ChatState extends State<Chat> {
   Widget build(BuildContext context) {
     String _chatId = _db.generateChatId(widget.myId, widget.user.uid);
 
-    return FutureProvider<List<Message>>.value(
+    return StreamProvider<List<Message>>.value(
         value: DatabaseMessengerService(chatId: _chatId).messages,
         child: Scaffold(
           appBar: AppBar(
@@ -36,6 +36,7 @@ class _ChatState extends State<Chat> {
             centerTitle: true,
           ),
           body: Container(
+              color: bodyBackgroundColor,
               alignment: AlignmentDirectional.bottomEnd,
               child: Column(
                 children: [

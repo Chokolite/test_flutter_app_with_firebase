@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_flutter_app_with_firebase/services/AuthService.dart';
 import 'package:my_flutter_app_with_firebase/shared/Constants.dart';
+import 'package:provider/provider.dart';
 
 class Email extends StatefulWidget {
   final Function switchView;
@@ -12,7 +13,6 @@ class Email extends StatefulWidget {
 }
 
 class _EmailState extends State<Email> {
-  final AuthService _auth = AuthService();
   final GlobalKey _formKey = GlobalKey<FormState>();
 
   String email = " ";
@@ -21,6 +21,8 @@ class _EmailState extends State<Email> {
 
   @override
   Widget build(BuildContext context) {
+    final AuthService _auth = Provider.of(context);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -56,6 +58,8 @@ class _EmailState extends State<Email> {
                     setState(() {
                       _error = "Wrong password or email";
                     });
+                  } else{
+                    Navigator.pop(context);
                   }
                 },
                 color: buttonColor,

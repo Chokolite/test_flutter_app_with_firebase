@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:my_flutter_app_with_firebase/model/Item.dart';
@@ -31,9 +32,10 @@ class DatabaseShopService {
   }
   addItem(String name, String model, String color, File image) async {
     try {
-      String imageLink = await _uploadImage(image, name);
-
+      String id = Random().hashCode.toString();
+      String imageLink = await _uploadImage(image, id);
       await _shop.add({
+        "id" : id,
         "name": name,
         "model": model,
         "color": color,
