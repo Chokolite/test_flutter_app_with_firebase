@@ -83,7 +83,7 @@ class DatabaseMessengerService {
   List<Message> _messagesListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return Message(
-        text: doc.data()["text"] as String ?? "",
+        text: doc.data()["text"].toString() ?? "",
         sendBy: doc.data()["sendBy"].toString()?? "",
         time: doc.data()["time"].toString() ?? "",
         imageLink: doc.data()["imageLink"].toString() ?? "",
@@ -93,12 +93,6 @@ class DatabaseMessengerService {
 
   Stream<List<Message>> get messages {
     return _chat
-        // .doc(chatId)
-        //         // .collection("messages")
-        //         // .orderBy("time")
-        //         // .get()
-        //         //  .then((snapshot) =>
-        //         //  snapshot.docs.map((e) => Message.fromFirebase(e)).toList());
         .doc(chatId)
         .collection("messages")
         .orderBy("time")
